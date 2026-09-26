@@ -23,14 +23,14 @@ El script de la base de datos está en [init.sql](init.sql).
 erDiagram
     CLIENTE ||--|| USUARIO : "tiene"
     CLIENTE ||--o{ CUENTA : "es dueño de"
-    CLIENTE ||--o{ BENEFICIARIO : "registra"
+    CLIENTE ||--o{ FAVORITOS : "registra"
     CUENTA ||--o{ MOVIMIENTO : "registra"
     CUENTA ||--o{ TRANSFERENCIA : "envía (origen)"
     CUENTA |o--o{ TRANSFERENCIA : "recibe (destino)"
     TRANSFERENCIA ||--o{ MOVIMIENTO : "genera"
 
     CLIENTE {
-        bigint id PK
+        int id PK
         varchar tipo_documento
         varchar numero_documento UK
         varchar nombres
@@ -42,18 +42,18 @@ erDiagram
     }
 
     USUARIO {
-        bigint id PK
+        int id PK
         varchar username UK
         varchar password_hash
         varchar rol
         int intentos_fallidos
         boolean bloqueado
         timestamp ultimo_login
-        bigint cliente_id FK,UK
+        int cliente_id FK,UK
     }
 
     CUENTA {
-        bigint id PK
+        int id PK
         varchar numero_cuenta UK
         varchar cci UK
         varchar tipo
@@ -61,11 +61,11 @@ erDiagram
         decimal saldo
         varchar estado
         timestamp fecha_apertura
-        bigint cliente_id FK
+        int cliente_id FK
     }
 
     TRANSFERENCIA {
-        bigint id PK
+        int id PK
         decimal monto
         varchar moneda
         varchar estado
@@ -76,27 +76,27 @@ erDiagram
         varchar cci_destino
         varchar banco_destino
         varchar titular_destino
-        bigint cuenta_origen_id FK
-        bigint cuenta_destino_id FK
+        int cuenta_origen_id FK
+        int cuenta_destino_id FK
     }
 
     MOVIMIENTO {
-        bigint id PK
+        int id PK
         varchar tipo
         decimal monto
         decimal saldo_resultante
         timestamp fecha
-        bigint cuenta_id FK
-        bigint transferencia_id FK
+        int cuenta_id FK
+        int transferencia_id FK
     }
 
-    BENEFICIARIO {
-        bigint id PK
+    FAVORITOS {
+        int id PK
         varchar alias
         varchar numero_cuenta
         varchar banco
         varchar titular
-        bigint cliente_id FK
+        int cliente_id FK
     }
 ```
 
@@ -127,7 +127,7 @@ erDiagram
 
 ---
 
-### Caso de uso 2: Guardar a alguien como beneficiario
+### Caso de uso 2: Guardar a alguien como favorito
 
 **Quién lo usa:** un cliente de MiniBank.
 
@@ -136,14 +136,14 @@ erDiagram
 **Cómo sucede:**
 
 1. El cliente entra a la app.
-2. Va a la sección "Mis beneficiarios" y elige "Agregar beneficiario".
+2. Va a la sección "Mis beneficiarios" y elige "Agregar favorito".
 3. Escribe los datos de la otra persona: número de cuenta, banco y nombre del titular.
 4. Le pone un nombre corto para reconocerlo fácil, por ejemplo "Mamá" o "Alquiler".
-5. Confirma y el beneficiario queda guardado.
+5. Confirma y el favorito queda guardado.
 6. La próxima vez que quiera transferir, solo lo escoge de su lista.
 
 **Qué puede salir mal:**
 
 - **Faltan datos o están mal escritos:** la app le dice qué debe corregir antes de guardar.
-- **Ya tiene guardada esa misma cuenta:** la app le avisa que ese beneficiario ya existe.
+- **Ya tiene guardada esa misma cuenta:** la app le avisa que ese favorito ya existe.
 - **Repite un nombre corto que ya usó:** la app le pide que ponga otro para no confundirse.
