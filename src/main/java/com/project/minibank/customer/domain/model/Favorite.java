@@ -4,11 +4,6 @@ import java.util.Objects;
 
 public class Favorite {
 
-    private static final int MAX_ALIAS_LENGTH = 50;
-    private static final int MAX_ACCOUNT_NUMBER_LENGTH = 20;
-    private static final int MAX_BANK_LENGTH = 50;
-    private static final int MAX_HOLDER_LENGTH = 100;
-
     private final Long id;
     private final String alias;
     private final String accountNumber;
@@ -17,14 +12,23 @@ public class Favorite {
     private final Long customerId;
 
     public Favorite(Long id, String alias, String accountNumber, String bank, String holder, Long customerId) {
-        this.id = id;
-        this.alias = requireText(alias, "El alias", MAX_ALIAS_LENGTH);
-        this.accountNumber = requireText(accountNumber, "El número de cuenta", MAX_ACCOUNT_NUMBER_LENGTH);
-        if (!this.accountNumber.chars().allMatch(Character::isDigit)) {
+        if (alias == null || alias.isBlank()) {
+            throw new IllegalArgumentException("El alias es obligatorio");
+        }
+        if (accountNumber == null || !accountNumber.matches("\\d+")) {
             throw new IllegalArgumentException("El número de cuenta solo debe contener dígitos");
         }
-        this.bank = requireText(bank, "El banco", MAX_BANK_LENGTH);
-        this.holder = requireText(holder, "El titular", MAX_HOLDER_LENGTH);
+        if (bank == null || bank.isBlank()) {
+            throw new IllegalArgumentException("El banco es obligatorio");
+        }
+        if (holder == null || holder.isBlank()) {
+            throw new IllegalArgumentException("El titular es obligatorio");
+        }
+        this.id = id;
+        this.alias = alias;
+        this.accountNumber = accountNumber;
+        this.bank = bank;
+        this.holder = holder;
         this.customerId = Objects.requireNonNull(customerId, "El cliente es obligatorio");
     }
 
@@ -38,17 +42,6 @@ public class Favorite {
 
     public boolean hasSameAliasAs(Favorite other) {
         return alias.equalsIgnoreCase(other.alias);
-    }
-
-    private static String requireText(String value, String field, int maxLength) {
-        if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException(field + " es obligatorio");
-        }
-        String trimmed = value.trim();
-        if (trimmed.length() > maxLength) {
-            throw new IllegalArgumentException(field + " no puede superar " + maxLength + " caracteres");
-        }
-        return trimmed;
     }
 
     public Long getId() {

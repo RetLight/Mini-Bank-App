@@ -6,9 +6,7 @@ import com.project.minibank.customer.domain.exception.FavoriteAlreadyExistsExcep
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class Customer {
 
@@ -39,9 +37,9 @@ public class Customer {
         this.lastNames = lastNames;
         this.email = email;
         this.phone = phone;
-        this.status = Objects.requireNonNull(status, "El estado es obligatorio");
+        this.status = status;
         this.registeredAt = registeredAt;
-        this.favorites = new ArrayList<>(favorites == null ? List.of() : favorites);
+        this.favorites = new ArrayList<>(favorites);
     }
 
     public Favorite addFavorite(String alias, String accountNumber, String bank, String holder) {
@@ -103,6 +101,6 @@ public class Customer {
     }
 
     public List<Favorite> getFavorites() {
-        return Collections.unmodifiableList(favorites);
+        return favorites;
     }
 }

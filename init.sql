@@ -1,6 +1,6 @@
 CREATE TABLE cliente
 (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   tipo_documento VARCHAR(10) NOT NULL,
   numero_documento VARCHAR(20) NOT NULL,
   nombres VARCHAR(100) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE cliente
 
 CREATE TABLE usuario
 (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(50) NOT NULL,
   password_hash VARCHAR(255) NOT NULL,
   rol VARCHAR(20) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE usuario
 
 CREATE TABLE cuenta
 (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   numero_cuenta VARCHAR(20) NOT NULL,
   cci VARCHAR(20) NOT NULL,
   tipo VARCHAR(20) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE cuenta
 
 CREATE TABLE transferencia
 (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   monto DECIMAL(15,2) NOT NULL,
   moneda VARCHAR(3) NOT NULL,
   estado VARCHAR(20) NOT NULL,
@@ -69,7 +69,7 @@ CREATE TABLE transferencia
 
 CREATE TABLE movimiento
 (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   tipo VARCHAR(20) NOT NULL,
   monto DECIMAL(15,2) NOT NULL,
   saldo_resultante DECIMAL(15,2) NOT NULL,
@@ -83,7 +83,7 @@ CREATE TABLE movimiento
 
 CREATE TABLE favoritos
 (
-  id INT NOT NULL,
+  id INT NOT NULL AUTO_INCREMENT,
   alias VARCHAR(50) NOT NULL,
   numero_cuenta VARCHAR(20) NOT NULL,
   banco VARCHAR(50) NOT NULL,
