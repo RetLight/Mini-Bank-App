@@ -102,32 +102,7 @@ erDiagram
 
 ## Casos de uso
 
-### Caso de uso 1: Enviar dinero a otra persona
-
-**Quién lo usa:** un cliente de MiniBank.
-
-**Qué quiere lograr:** mandar dinero desde una de sus cuentas a la cuenta de otra persona, sea de MiniBank o de otro banco.
-
-**Cómo sucede:**
-
-1. El cliente entra a la app con su usuario y contraseña.
-2. Elige la cuenta desde la que va a enviar el dinero.
-3. Indica a quién le envía: escoge un beneficiario que ya tiene guardado o escribe los datos de la cuenta destino.
-4. Escribe cuánto quiere enviar.
-5. La app le muestra un resumen de la solicitud para valdiación.
-6. El cliente confirma.
-7. Se le descuenta dinero.
-8. El envío aparece en su lista de movimientos.
-
-**Qué puede salir mal:**
-
-- **No tiene suficiente dinero:** la app le avisa que su saldo no alcanza y no envía nada.
-- **La cuenta destino no existe o está cerrada:** la transferencia se rechaza y se le explica el motivo.
-- **Las monedas no coinciden**: la app se lo indica antes de confirmar.
-
----
-
-### Caso de uso 2: Guardar a alguien como favorito
+### Caso de uso 1: Guardar a alguien como favorito
 
 **Quién lo usa:** un cliente de MiniBank.
 
@@ -136,7 +111,7 @@ erDiagram
 **Cómo sucede:**
 
 1. El cliente entra a la app.
-2. Va a la sección "Mis beneficiarios" y elige "Agregar favorito".
+2. Va a la sección "Mis favoritos" y elige "Agregar favorito".
 3. Escribe los datos de la otra persona: número de cuenta, banco y nombre del titular.
 4. Le pone un nombre corto para reconocerlo fácil, por ejemplo "Mamá" o "Alquiler".
 5. Confirma y el favorito queda guardado.
@@ -147,3 +122,22 @@ erDiagram
 - **Faltan datos o están mal escritos:** la app le dice qué debe corregir antes de guardar.
 - **Ya tiene guardada esa misma cuenta:** la app le avisa que ese favorito ya existe.
 - **Repite un nombre corto que ya usó:** la app le pide que ponga otro para no confundirse.
+
+----
+
+### Caso de uso 2: Obtener favoritos
+
+**Quién lo usa:** un cliente de MiniBank.
+
+**Qué quiere lograr:** Quiere buscar a las personas que tienen guardadas como favoritos.
+
+**Cómo sucede:**
+
+1. El cliente entra a la app.
+2. Va a la sección "Mis favoritos"
+3. Le aparecen los favoritos
+
+**Qué puede salir mal:**
+
+- **Que no hayan favoritos guardados:** la app le mostrara que no hay favoritos guardados.
+----
